@@ -1,6 +1,6 @@
 {
   "name": "ng-electron",
-  "version": "0.0.16",
+  "version": "0.0.17",
   "description": "Code which shows how to integrate an Angular-based app into Electron",
   "author": "Boris Skert",
   "scripts": {
