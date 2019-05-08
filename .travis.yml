@@ -11,18 +11,13 @@ matrix:
         - npm run test:ci
         - npm run build:web:prod
         - npm run build:electron:prod
-      deploy:
-        - skip_cleanup: true
-          provider: script
-          script: /bin/bash .travis/deploy.sh
-          on:
-            tags: true
-            repo: borisskert/electron-updater-test
 
     - language: node_js
       os: osx
       node_js:
         - '11'
+      script:
+        - npm ci
       deploy:
         - skip_cleanup: true
           provider: script
