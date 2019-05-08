@@ -12,11 +12,11 @@ matrix:
         - npm run build:web:prod
         - npm run build:electron:prod
 
+    # deployment only works on osx
     - language: node_js
       os: osx
       node_js:
         - '11'
-      script: []
       deploy:
         - skip_cleanup: true
           provider: script
