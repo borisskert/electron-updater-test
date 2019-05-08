@@ -1,6 +1,7 @@
 matrix:
   include:
     - language: node_js
+      os: linux
       node_js:
         - '11'
       addons:
@@ -12,11 +13,21 @@ matrix:
         - npm run build:web:prod
         - npm run build:electron:prod
 
+    # also build in windows environment (which are are in early access stage in travis)
+    - language: node_js
+      os: windows
+      node_js:
+        - '11'
+      addons:
+        chrome: stable
+
     # deployment only works on osx
     - language: node_js
       os: osx
       node_js:
         - '11'
+      addons:
+        chrome: stable
       deploy:
         - skip_cleanup: true
           provider: script
