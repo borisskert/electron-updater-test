@@ -1,6 +1,6 @@
 {
   "name": "ng-electron",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "Code which shows how to integrate an Angular-based app into Electron",
   "author": "Boris Skert",
   "scripts": {
@@ -11,11 +11,12 @@
     "build:web": "npm run postinstall:web && npx ng build",
     "build:web:prod": "npm run postinstall:web && npx ng build -c production",
     "build:electron": "npm run postinstall:electron && npm run electron:serve-tsc && npx ng build -c electron",
-    "build:electron:prod": "npm run postinstall:electron && npm run electron:serve-tsc && npx ng build -c electron-production",
+    "build:electron:prod": "npm run postinstall:electron && npm run electron:tsc && npx ng build -c electron-production",
     "test": "npx ng test --browsers Chrome",
     "test:ci": "npx ng test --watch=false --browsers Chrome_headless",
     "lint": "npx ng lint",
     "e2e": "npx ng e2e",
+    "electron:tsc": "npx tsc -p tsconfig-electron.json",
     "electron:serve-tsc": "npx tsc -p tsconfig-serve.json",
     "electron:serve": "wait-on http-get://localhost:4200/ && npm run electron:serve-tsc && electron . --serve",
     "electron:local": "npm run build:electron && electron .",
@@ -64,12 +65,5 @@
     "electron-builder": "20.36.2",
     "electron-reload": "1.3.0",
     "wait-on": "3.2.0"
-  },
-  "build": {
-    "publish": [{
-      "provider": "github",
-      "owner": "borisskert",
-      "repo": "electron-updater-test"
-    }]
   }
 }

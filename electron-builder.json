@@ -36,5 +36,12 @@
     "target": [
       "AppImage"
     ]
-  }
+  },
+  "publish": [
+    {
+      "provider": "github",
+      "owner": "borisskert",
+      "repo": "electron-updater-test"
+    }
+  ]
 }
