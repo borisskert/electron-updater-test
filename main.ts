@@ -101,6 +101,7 @@ class AppUpdater {
     app.on('ready', () => {
       createWindow();
       appUpdater.init();
+      sendStatusToWindow('Hello world');
     });
 
     // Quit when all windows are closed.
