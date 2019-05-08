@@ -101,7 +101,6 @@ class AppUpdater {
     app.on('ready', () => {
       createWindow();
       appUpdater.init();
-      sendStatusToWindow('Hello world');
     });
 
     // Quit when all windows are closed.
@@ -121,7 +120,7 @@ class AppUpdater {
       }
     });
   } catch (e) {
-    console.log('Should never ever happen:', e);
+    log.info('Fatal error occured while starting app:', e);
     throw e;
   }
 })();
