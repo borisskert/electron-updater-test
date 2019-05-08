@@ -89,7 +89,10 @@ class AppUpdater {
 
   function sendStatusToWindow(text) {
     log.info(text);
-    browserWindow.webContents.send('message', text);
+
+    if (browserWindow && browserWindow.webContents) {
+      browserWindow.webContents.send('message', text);
+    }
   }
 
   const appUpdater = new AppUpdater(sendStatusToWindow);
