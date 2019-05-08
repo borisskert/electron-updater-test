@@ -6,13 +6,13 @@ const { autoUpdater } = require('electron-updater');
 const log = require('electron-log');
 
 class AppUpdater {
-  constructor(private readonly sendStatusToWindow: (text: string) => void) {
+  constructor(private readonly sendStatusToWindow: (text: string) => void) {}
+
+  public init(): void {
     log.transports.file.level = 'debug';
     autoUpdater.logger = log;
     autoUpdater.checkForUpdatesAndNotify();
-  }
 
-  public init(): void {
     autoUpdater.on('checking-for-update', () => {
       this.sendStatusToWindow('Checking for update...');
     });
@@ -91,6 +91,9 @@ class AppUpdater {
     browserWindow.webContents.send('message', text);
   }
 
+  const appUpdater = new AppUpdater(sendStatusToWindow);
+  appUpdater.init();
+
   try {
     // This method will be called when Electron has finished
     // initialization and is ready to create browser windows.
@@ -113,9 +116,6 @@ class AppUpdater {
         createWindow();
       }
     });
-
-    const appUpdater = new AppUpdater(sendStatusToWindow);
-    appUpdater.init();
   } catch (e) {
     console.log('Should never ever happen:', e);
     throw e;
