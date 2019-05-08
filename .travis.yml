@@ -10,12 +10,11 @@ matrix:
         - npm run lint
         - npm run test:ci
         - npm run build:web:prod
+        - npm run build:electron:prod
     - language: node_js
       os: osx
       node_js:
         - '11'
-      addons:
-        chrome: stable
       script:
         - ENCRYPTED_CERT_P12=encrypted.cert.p12
         - DECRYPTED_CERT=cert.pem
@@ -24,22 +23,10 @@ matrix:
         - openssl pkcs12 -in "${ENCRYPTED_CERT_P12}" -nodes -out "${DECRYPTED_CERT}" -password pass:${CSC_KEY_PASSWORD}
         - sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain "${DECRYPTED_CERT}"
         - npm run electron:mac
-      deploy:
-        provider: releases
-        skip_cleanup: true
-        api_key:
-          secure: gz4x+tCnNlh/K//2vQl85Oa6rPehlLtvtqb9lWQ+fC67M/fY8CLoE6IZkTioCVPo6cH/sEtDs8ipW3baXJjo+i+GUPwPDMcCKrdSLvtsvQ8dzrofUXqAgMgKGZ5GytLNWYKpOnhUysOhYOtHk2xvpv05Dl4Tk1hvv8WL88exK9PVHcwMHtjx2XAeELnLQVOs1Oxd+GESuq/u53BM6S/KSAzELdixBc0EKdE+3IG6gaqJ5ObN+I1EKhrNOvWqkuxkNoMORPJTrE5vbJC2yvjf5I8XEPdhtO0FfSNBT3NFj9/Ai73kVZb9PS0cbNaLRb9EiLlWvY444rQ6Jb1EorR5AF6m90NOUkVH9pPoy96xzM9xc9qpLobpQXlA0L6PTVaA+8Uk8XI/pR4VelTfNBi99WgngxcKcBzTk4m/Rp14GBEgrkcrAACzDJ1lqpLToLYC872oNur/KlrYLeKd2668gNMfqb0SAEfvmNIOdoadn0J04EU4DI8b55l8h5RlZNMfeE7Xd8QwOa1kD4d53xteaywr4F7cv6DhuetMnCSa1DXy4HXmpah5bIgIR7TI5SOcaxwosB37kCZlT0YM+KnG2zHqDvZT7fMLcZdAEltrT6hf2R0SeJzaKYut1HgWCc7MY19XgH9oXU9F5ewWs5QDigsgQ2baksCP+XonqZIwRBo=
-        file_glob: true
-        file: release/ng-electron-*.dmg
-        on:
-          repo: borisskert/electron-updater-test
-          tags: true
     - language: node_js
       os: osx
       node_js:
         - '11'
-      addons:
-        chrome: stable
       script:
         - ENCRYPTED_CERT_P12=encrypted.cert.p12
         - DECRYPTED_CERT=cert.pem
@@ -48,17 +35,6 @@ matrix:
         - openssl pkcs12 -in "${ENCRYPTED_CERT_P12}" -nodes -out "${DECRYPTED_CERT}" -password pass:${CSC_KEY_PASSWORD}
         - sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain "${DECRYPTED_CERT}"
         - npm run electron:windows
-      deploy:
-        provider: releases
-        skip_cleanup: true
-        api_key:
-          secure: gz4x+tCnNlh/K//2vQl85Oa6rPehlLtvtqb9lWQ+fC67M/fY8CLoE6IZkTioCVPo6cH/sEtDs8ipW3baXJjo+i+GUPwPDMcCKrdSLvtsvQ8dzrofUXqAgMgKGZ5GytLNWYKpOnhUysOhYOtHk2xvpv05Dl4Tk1hvv8WL88exK9PVHcwMHtjx2XAeELnLQVOs1Oxd+GESuq/u53BM6S/KSAzELdixBc0EKdE+3IG6gaqJ5ObN+I1EKhrNOvWqkuxkNoMORPJTrE5vbJC2yvjf5I8XEPdhtO0FfSNBT3NFj9/Ai73kVZb9PS0cbNaLRb9EiLlWvY444rQ6Jb1EorR5AF6m90NOUkVH9pPoy96xzM9xc9qpLobpQXlA0L6PTVaA+8Uk8XI/pR4VelTfNBi99WgngxcKcBzTk4m/Rp14GBEgrkcrAACzDJ1lqpLToLYC872oNur/KlrYLeKd2668gNMfqb0SAEfvmNIOdoadn0J04EU4DI8b55l8h5RlZNMfeE7Xd8QwOa1kD4d53xteaywr4F7cv6DhuetMnCSa1DXy4HXmpah5bIgIR7TI5SOcaxwosB37kCZlT0YM+KnG2zHqDvZT7fMLcZdAEltrT6hf2R0SeJzaKYut1HgWCc7MY19XgH9oXU9F5ewWs5QDigsgQ2baksCP+XonqZIwRBo=
-        file_glob: true
-        file: release/ng-electron *.exe
-        on:
-          repo: borisskert/electron-updater-test
-          tags: true
-
 env:
   global:
     # encrypted CSC settings
