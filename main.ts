@@ -11,7 +11,6 @@ class AppUpdater {
   public init(): void {
     log.transports.file.level = 'debug';
     autoUpdater.logger = log;
-    autoUpdater.checkForUpdatesAndNotify();
 
     autoUpdater.on('checking-for-update', () => {
       this.sendStatusToWindow('Checking for update...');
@@ -39,6 +38,8 @@ class AppUpdater {
     autoUpdater.on('update-downloaded', (info) => {
       this.sendStatusToWindow('Update downloaded');
     });
+
+    autoUpdater.checkForUpdatesAndNotify();
   }
 }
 
@@ -92,13 +93,15 @@ class AppUpdater {
   }
 
   const appUpdater = new AppUpdater(sendStatusToWindow);
-  appUpdater.init();
 
   try {
     // This method will be called when Electron has finished
     // initialization and is ready to create browser windows.
     // Some APIs can only be used after this event occurs.
-    app.on('ready', createWindow);
+    app.on('ready', () => {
+      createWindow();
+      appUpdater.init();
+    });
 
     // Quit when all windows are closed.
     app.on('window-all-closed', () => {
