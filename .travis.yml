@@ -6,7 +6,7 @@ matrix:
       addons:
         chrome: stable
       script:
-        - npm ci
+        # no need for `npm ci`, travis-ci does this automatically
         - npm run lint
         - npm run test:ci
         - npm run build:web:prod
@@ -16,8 +16,7 @@ matrix:
       os: osx
       node_js:
         - '11'
-      script:
-        - echo "Nothing to do..."
+      script: []
       deploy:
         - skip_cleanup: true
           provider: script
