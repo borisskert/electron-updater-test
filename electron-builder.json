@@ -23,15 +23,14 @@
     "icon": "build/icons/win/app.ico",
     "target": [
       "portable"
-    ],
-    "electronUpdaterCompatibility": ">=4.0.6"
+    ]
   },
   "mac": {
     "icon": "build/icons/mac/app.icns",
     "target": [
-      "dmg"
-    ],
-    "electronUpdaterCompatibility": ">=4.0.6"
+      "dmg",
+      "zip"
+    ]
   },
   "linux": {
     "icon": "build/icons/png",
@@ -45,5 +44,6 @@
       "owner": "borisskert",
       "repo": "electron-updater-test"
     }
-  ]
+  ],
+  "electronUpdaterCompatibility": ">=4.0.6"
 }
