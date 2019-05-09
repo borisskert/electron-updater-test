@@ -16,5 +16,4 @@ openssl pkcs12 -in "${ENCRYPTED_CERT_P12}" -nodes -out "${DECRYPTED_CERT}" -pass
 sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain "${DECRYPTED_CERT}"
 
 # build and deploy artifacts
-npm run electron:mac
-npm run electron:windows
+npm run electron:prod
