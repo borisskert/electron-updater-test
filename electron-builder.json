@@ -31,7 +31,8 @@
     "target": [
       "dmg",
       "zip"
-    ]
+    ],
+    "verifyUpdateCodeSignature": false
   },
   "linux": {
     "icon": "build/icons/png",
