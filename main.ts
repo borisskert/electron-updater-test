@@ -122,6 +122,18 @@ class AppUpdater {
         createWindow();
       }
     });
+
+    /**
+     * SSL/TSL: this is the self signed certificate support
+     * https://stackoverflow.com/questions/38986692/how-do-i-trust-a-self-signed-certificate-from-an-electron-app
+     */
+    app.on('certificate-error', (event, webContents, url, error, certificate, callback) => {
+      // On certificate error we disable default behaviour (stop loading the page)
+      // and we then say "it is all fine - true" to the callback
+      event.preventDefault();
+      log.warn('Certificate error occured:', error);
+      callback(true);
+    });
   } catch (e) {
     log.info('Fatal error occured while starting app:', e);
     throw e;
