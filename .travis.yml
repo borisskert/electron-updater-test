@@ -20,6 +20,12 @@ matrix:
         - '11'
       addons:
         chrome: stable
+      script:
+        # no need for `npm ci`, travis-ci does this automatically
+        - npm run lint
+        - npm run test:ci
+        - npm run build:web:prod
+        - npm run build:electron:prod
 
     # deployment only works on osx
     - language: node_js
@@ -28,6 +34,12 @@ matrix:
         - '11'
       addons:
         chrome: stable
+      script:
+        # no need for `npm ci`, travis-ci does this automatically
+        - npm run lint
+        - npm run test:ci
+        - npm run build:web:prod
+        - npm run build:electron:prod
       deploy:
         - skip_cleanup: true
           provider: script
