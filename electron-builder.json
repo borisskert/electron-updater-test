@@ -22,7 +22,9 @@
   "win": {
     "icon": "build/icons/win/app.ico",
     "target": [
-      "portable"
+      "portable",
+      "nsis-web",
+      "msi"
     ]
   },
   "mac": {
