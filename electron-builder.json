@@ -24,15 +24,15 @@
     "target": [
       "portable",
       "nsis-web"
-    ]
+    ],
+    "verifyUpdateCodeSignature": false
   },
   "mac": {
     "icon": "build/icons/mac/app.icns",
     "target": [
       "dmg",
       "zip"
-    ],
-    "verifyUpdateCodeSignature": false
+    ]
   },
   "linux": {
     "icon": "build/icons/png",
